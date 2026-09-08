@@ -5,6 +5,7 @@ Sono inclusi vari tipi di opere derivate (*SpinOffs*) :
 2. Sinossi estese
 3. Schede tecniche di descrizione schematica (Quarte di Copertina)
 4. Indici Strutturali (Liste di Titoli dei Capitoli)
+
 nella sezione "verticale" ed ogni sorta di articoli tematici sugli archetipi e leitmotiv strutturali nella sezione "orizzontale".
 Sono inclusi anche due pacchetti coi sorgenti GAMBAS di un nostro software per l'analisi dei clusters lessicali semantici.
 Last modified on 09/09/2026
