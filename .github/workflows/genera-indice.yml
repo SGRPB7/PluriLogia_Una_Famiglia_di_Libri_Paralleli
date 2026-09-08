@@ -1,0 +1,31 @@
+name: Genera Indice Automatico
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '*.html'
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica i file del repo
+        uses: actions/checkout@v3
+
+      - name: Crea o aggiorna index.html
+        run: |
+          echo "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Archivio</title><style>body{font-family:sans-serif;max-width:800px;margin:40px auto;padding:20px;} ul{list-style:none;padding:0;} li{margin:15px 0;padding:15px;background:#f6f8fa;border-radius:6px;border-left:4px solid #0366d6;} a{text-decoration:none;color:#0366d6;font-weight:bold;font-size:1.1em;}</style></head><body><h1>Archivio Articoli</h1><ul>" > index.html
+          for f in $(ls -t *.html | grep -v '^index.html$'); do
+            nome=$(echo "$f" | sed 's/\.html$//' | tr '_' ' ')
+            echo "<li><a href='$f'>$nome</a></li>" >> index.html
+          done
+          echo "</ul></body></html>" >> index.html
+
+      - name: Salva le modifiche
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "🤖 Auto-aggiornamento indice" || echo "Nessuna modifica da salvare"
+          git push
