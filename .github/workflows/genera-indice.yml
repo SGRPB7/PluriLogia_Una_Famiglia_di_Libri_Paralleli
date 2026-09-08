@@ -21,7 +21,7 @@ jobs:
         run: |
           python3 -c "
           import os
-          files = [f for f in os.listdir('.') if f.endswith('.html') and f != 'index.html']
+          files = [f for f in os.listdir('.') if (f.endswith('.html') or f.endswith('.pdf') or f.endswith('.md') or f.endswith('.txt')) and f != 'index.html']
           files.sort(key=lambda x: os.path.getmtime(x), reverse=True)
           
           html = '<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Archivio</title><style>body{font-family:sans-serif;max-width:800px;margin:40px auto;padding:20px;} ul{list-style:none;padding:0;} li{margin:15px 0;padding:15px;background:#f6f8fa;border-radius:6px;border-left:4px solid #0366d6;} a{text-decoration:none;color:#0366d6;font-weight:bold;font-size:1.1em;}</style></head><body><h1>Archivio Articoli</h1><ul>'
