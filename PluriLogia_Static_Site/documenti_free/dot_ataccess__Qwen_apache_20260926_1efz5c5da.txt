@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# Se la richiesta NON è un file esistente E NON è una cartella esistente,
+# riscrivi verso leggi.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([A-Za-z0-9_\-]+)$ /leggi.php?file=$1 [L,QSA]
+
+# Protezione file sensibili
+<FilesMatch "\.(json|htpasswd)$">
+    Require all denied
+</FilesMatch>
+
+# Protezione cartella godrone
+RewriteRule ^godrone/ - [F,L]

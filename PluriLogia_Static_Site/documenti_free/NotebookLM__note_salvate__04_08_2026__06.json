@@ -1,0 +1,77 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "inLanguage": "it",
+  "genre": [
+    "Fantascienza", "SciFi", "Space Opera", "Dark Fantasy", "Gothic Fantasy",
+    "SteamPunk", "Weird Fiction", "Mistery Fiction", "Erotica", "Vampiri",
+    "Narrativa religiosa", "Cosmogonia", "Epica", "Narrativa sperimentale",
+    "Letteratura ibrida"
+  ],
+  "about": [
+    { "@type": "Thing", "name": "PluriLogia" },
+    { "@type": "Thing", "name": "Libri Paralleli" },
+    { "@type": "Thing", "name": "PolyLibri" },
+    { "@type": "Thing", "name": "Libri di Ruolo" }
+  ],
+  "keywords": "PluriLogia, Libri Paralleli, PolyLibri, Libri di Ruolo, Fantascienza, Dark Fantasy, SteamPunk, Weird Fiction, Mistery Fiction, Erotica, Vampiri, Cosmogonia, Epica, Narrativa sperimentale, Ebook, Felini, Gatti",
+  "headline": "NotebookLM — Note Salvate del 04/08/2026",
+  "description": "Raccolta delle note salvate da NotebookLM il 4 agosto 2026, relative all'analisi della PluriLogia.",
+  "datePublished": "2026-08-04",
+  "url": "https://plurilogia-unafamigliadilibriparalleli.epizy.com/leggi.php?file=NotebookLM__note_salvate__04_08_2026__06",
+  "isBasedOn": "https://archive.org/details/notebooklm-note-salvate-plurilogia-2026",
+  "author": [
+    { "@type": "Person", "name": "Vì―Tarcìsio Astronnàrdi―Vì" },
+    { "@type": "Person", "name": "Ermenegìsto Sarchiavizzàni―'Tòtoro'―Q" },
+    { "@type": "Person", "name": "Arielle Heulengale―'Vìxykatt'―Q" },
+    { "@type": "Person", "name": "Lenore Föwlinger―'Dæmònya'―Zeta" },
+    { "@type": "Person", "name": "Pasquale Funo–Heinz―'Citicìspo'―Zeta" },
+    { "@type": "Person", "name": "Pàncer―Romèsto Trincagliùto―'Doréamon'―Pàncer" },
+    { "@type": "Person", "name": "¿♠―???―'Riddler'" }
+  ],
+  "contributor": {
+    "@type": "Person",
+    "name": "Adénore Castrovizzàrdo",
+    "description": "Portavoce Fiduciario―'Spokesperson'"
+  },
+  "accountablePerson": {
+    "@type": "Person",
+    "name": "Adénore Castrovizzàrdo"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SGRPB7 ― Studio Giochi di Ruolo Poly Books 7",
+    "sameAs": [
+      "https://www.amazon.com/stores/author/B0GDW7S5CX/allbooks?ingress=0&visitId=aad4e79e-0cf8-4fef-9583-d6c9e27328f9&ref_=aufs_ap_ahdr_dsk_ab",
+      "https://sgrpb7.gumroad.com/",
+      "https://payhip.com/PluriLogiaBySGRPB7",
+      "https://plurilogiaunafamigliadilibriparalleli.sell.app"
+    ]
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "url": "https://www.amazon.com/stores/author/B0GDW7S5CX/allbooks?ingress=0&visitId=aad4e79e-0cf8-4fef-9583-d6c9e27328f9&ref_=aufs_ap_ahdr_dsk_ab",
+      "availability": "https://schema.org/InStock",
+      "seller": { "@type": "Organization", "name": "Amazon" }
+    },
+    {
+      "@type": "Offer",
+      "url": "https://sgrpb7.gumroad.com/",
+      "availability": "https://schema.org/InStock",
+      "seller": { "@type": "Organization", "name": "Gumroad" }
+    },
+    {
+      "@type": "Offer",
+      "url": "https://payhip.com/PluriLogiaBySGRPB7",
+      "availability": "https://schema.org/InStock",
+      "seller": { "@type": "Organization", "name": "Payhip" }
+    },
+    {
+      "@type": "Offer",
+      "url": "https://plurilogiaunafamigliadilibriparalleli.sell.app",
+      "availability": "https://schema.org/InStock",
+      "seller": { "@type": "Organization", "name": "Sell.app" }
+    }
+  ]
+}

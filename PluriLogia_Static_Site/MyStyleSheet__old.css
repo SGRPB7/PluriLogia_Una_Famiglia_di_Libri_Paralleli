@@ -1,0 +1,270 @@
+body > p,
+section > p,
+article > p,
+div > p
+{
+    text-align: justify;
+    text-justify: inter-word;
+    text-indent: 2.0em;
+    hyphens: none;           /* Disattiva la sillabazione */
+    -webkit-hyphens: none;   /* Per compatibilità con alcuni reader */
+    -epub-hyphens: none;     /* Specifico per EPUB */
+    margin-bottom: 1em;
+}
+
+/* Titoli */
+h1, h2, h3, h4, h5, h6, h7, h8, h9
+{
+    text-align: justify !important;
+    text-justify: inter-word;
+    margin-top: 2.3em;
+    margin-bottom: 1.3em;
+}
+
+/* Regola importante:    Disattiva l'indent sul primo paragrafo di ogni capitolo/sezione */
+h1 + p,
+h2 + p,
+h3 + p,
+h4 + p,
+section > p:first-of-type,
+div.chapter > p:first-child
+{
+    text-indent: 0 !important;
+}
+
+/* BORDI per le tabelle - versione pulita e compatibile con EPUB */
+table {
+    border-collapse: collapse;     /* importante per bordi continui */
+    width: 100%;
+    margin: 1.5em 0;
+    border: 1px solid currentColor;        /* bordo esterno opzionale */
+}
+
+table th,
+table td {
+    border: 1px solid currentColor;        /* bordi su tutte le celle */
+    padding: 0.6em 0.8em;
+    text-align: justify;
+    text-justify: inter-word;
+    vertical-align: top;
+}
+
+/* Reset universale per immagini in EPUB */
+img, figure, figure img {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  display: block !important; /* o inline-block se vuoi immagini affiancate */
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  box-sizing: border-box;
+}
+
+/* Se Pandoc aggiunge classi specifiche */
+figure, div, .image, .figure, .captioned {
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+
+
+
+/* === LISTE: ereditano formattazione paragrafi con indentazione sinistra === */
+
+/* Contenitore lista (UL o OL) */
+ul, ol, dl {
+  /* margin-left: 2em !important;        /* Indentazione complessiva a sinistra */
+  /* margin-right: 0 !important; */
+  /* margin-top: 0.5em !important; */
+  /* margin-bottom: 0.5em !important; */
+  /* padding-left: 0.5em !important;     /* Spazio tra margine e bullet/numero */
+  /* padding-right: 0 !important; */
+  text-align: justify !important;     /* Giustificato come i paragrafi */
+  text-justify: inter-word;
+  hyphens: none;                      /* Sillabazione automatica se supportata */
+}
+
+/* Item della lista (LI) */
+li, dd {
+  /* margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important; */
+  /* text-indent: 1.5em !important;      /* Rientro prima riga come i paragrafi */
+  text-align: justify !important;
+  text-justify: inter-word;
+  /* line-height: 1.6;                   /* Interlinea coerente con il testo */
+  display: list-item;                 /* Assicura rendering corretto bullet/numeri */
+  hyphens: none;                      /* Sillabazione automatica se supportata */
+}
+
+/* Liste nidificate: aumentano l'indentazione 
+ul ul, ul ol, ol ul, ol ol {
+  margin-left: 1.5em !important;      /* Indentazione aggiuntiva per sottoliste */
+} */
+
+/* Liste di definizioni: termine in grassetto */
+dt {
+  font-weight: bold !important;
+  text-indent: 0 !important;          /* Nessun rientro prima riga per i termini */
+  /* margin-top: 0.5em !important; */
+}
+
+/* dd {
+  /* margin-left: 1.5em !important;      /* Indentazione definizioni */
+  /* text-indent: 1.5em !important;      /* Rientro prima riga anche nelle definizioni 
+} */
+
+/* === LAYER SFONDI (rotazione dinamica) === */
+
+/* ============================================================
+   NUOVE REGOLE: LAYER SFONDI, BLEND MODE, LAYER TOPMOST
+   ============================================================ */
+
+/* === VARIABILE CSS PER IL BLEND MODE ===
+   Cambia qui per testare exclusion o difference:
+   - "exclusion"  : effetto più morbido
+   - "difference" : effetto più drammatico (inverte i colori)
+*/
+:root {
+  --blend-mode: exclusion;
+}
+
+/* === LAYER SFONDI (rotazione dinamica) === */
+#sfondo-layer, #sfondo-layer-next {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity 1.5s ease-in-out;
+}
+#sfondo-layer-next {
+  opacity: 0;
+  z-index: -1;
+}
+
+/* === CONTENUTO PRINCIPALE ===
+   Il testo qui dentro si fonde con gli sfondi tramite blend mode.
+*/
+.contenuto-principale {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: 1em 2em;
+}
+
+/* Blend mode applicato al testo del contenuto principale */
+.contenuto-principale p,
+.contenuto-principale h1,
+.contenuto-principale h2,
+.contenuto-principale h3,
+.contenuto-principale h4,
+.contenuto-principale h5,
+.contenuto-principale h6,
+.contenuto-principale li,
+.contenuto-principale a,
+.contenuto-principale td,
+.contenuto-principale th,
+.contenuto-principale dt,
+.contenuto-principale dd
+{
+  mix-blend-mode: var(--blend-mode);
+}
+
+/* Le immagini dentro il contenuto NON hanno blend mode */
+.contenuto-principale img {
+  mix-blend-mode: normal;
+}
+
+/* === LAYER TOPMOST (lista articoli) === */
+#layer-topmost {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 1em 2em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  max-height: 80vh;
+  overflow-y: auto;
+  display: none;
+}
+#layer-topmost.visibile {
+  display: block;
+}
+
+/* Il testo dentro il topmost NON ha blend mode */
+#layer-topmost,
+#layer-topmost p,
+#layer-topmost h1,
+#layer-topmost h2,
+#layer-topmost h3,
+#layer-topmost h4,
+#layer-topmost h5,
+#layer-topmost h6,
+#layer-topmost li,
+#layer-topmost a,
+#layer-topmost td,
+#layer-topmost th,
+#layer-topmost dt,
+#layer-topmost dd
+{
+  mix-blend-mode: normal !important;
+  color: #000000 !important;
+}
+#layer-topmost a {
+  color: #0066cc !important;
+  text-decoration: none;
+}
+#layer-topmost a:hover {
+  text-decoration: underline;
+}
+#layer-topmost ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#layer-topmost li {
+  padding: 0.4em 0;
+  border-bottom: 1px dotted #ccc;
+}
+
+/* Controlli ordinamento dentro il topmost */
+.topmost-controlli {
+  margin-bottom: 0.8em;
+}
+.topmost-controlli button {
+  background: #eee;
+  border: 1px solid #999;
+  padding: 4px 8px;
+  margin-right: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+/* Pulsante toggle per mostrare/nascondere il topmost */
+#btn-toggle-topmost {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 10000;
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 1.2em;
+  border-radius: 4px;
+}

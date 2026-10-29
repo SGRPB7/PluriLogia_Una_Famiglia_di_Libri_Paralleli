@@ -1,0 +1,237 @@
+body > p,
+section > p,
+article > p,
+div > p
+{
+    text-align: justify;
+    text-justify: inter-word;
+    text-indent: 2.0em;
+    hyphens: none;           /* Disattiva la sillabazione */
+    -webkit-hyphens: none;   /* Per compatibilità con alcuni reader */
+    -epub-hyphens: none;     /* Specifico per EPUB */
+    margin-bottom: 1em;
+}
+
+/* Titoli */
+h1, h2, h3, h4, h5, h6, h7, h8, h9
+{
+    text-align: justify !important;
+    text-justify: inter-word;
+    margin-top: 2.3em;
+    margin-bottom: 1.3em;
+}
+
+/* Regola importante:    Disattiva l'indent sul primo paragrafo di ogni capitolo/sezione */
+h1 + p,
+h2 + p,
+h3 + p,
+h4 + p,
+section > p:first-of-type,
+div.chapter > p:first-child
+{
+    text-indent: 0 !important;
+}
+
+/* BORDI per le tabelle - versione pulita e compatibile con EPUB */
+table {
+    border-collapse: collapse;     /* importante per bordi continui */
+    width: 100%;
+    margin: 1.5em 0;
+    border: 1px solid currentColor;        /* bordo esterno opzionale */
+}
+
+table th,
+table td {
+    border: 1px solid currentColor;        /* bordi su tutte le celle */
+    padding: 0.6em 0.8em;
+    text-align: justify;
+    text-justify: inter-word;
+    vertical-align: top;
+}
+
+/* Reset universale per immagini in EPUB */
+img, figure, figure img {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  display: block !important; /* o inline-block se vuoi immagini affiancate */
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  box-sizing: border-box;
+}
+
+/* Se Pandoc aggiunge classi specifiche */
+figure, div, .image, .figure, .captioned {
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+
+
+
+/* === LISTE: ereditano formattazione paragrafi con indentazione sinistra === */
+
+/* Contenitore lista (UL o OL) */
+ul, ol, dl {
+  /* margin-left: 2em !important;        /* Indentazione complessiva a sinistra */
+  /* margin-right: 0 !important; */
+  /* margin-top: 0.5em !important; */
+  /* margin-bottom: 0.5em !important; */
+  /* padding-left: 0.5em !important;     /* Spazio tra margine e bullet/numero */
+  /* padding-right: 0 !important; */
+  text-align: justify !important;     /* Giustificato come i paragrafi */
+  text-justify: inter-word;
+  hyphens: none;                      /* Sillabazione automatica se supportata */
+}
+
+/* Item della lista (LI) */
+li, dd {
+  /* margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important; */
+  /* text-indent: 1.5em !important;      /* Rientro prima riga come i paragrafi */
+  text-align: justify !important;
+  text-justify: inter-word;
+  /* line-height: 1.6;                   /* Interlinea coerente con il testo */
+  display: list-item;                 /* Assicura rendering corretto bullet/numeri */
+  hyphens: none;                      /* Sillabazione automatica se supportata */
+}
+
+/* Liste nidificate: aumentano l'indentazione 
+ul ul, ul ol, ol ul, ol ol {
+  margin-left: 1.5em !important;      /* Indentazione aggiuntiva per sottoliste */
+} */
+
+/* Liste di definizioni: termine in grassetto */
+dt {
+  font-weight: bold !important;
+  text-indent: 0 !important;          /* Nessun rientro prima riga per i termini */
+  /* margin-top: 0.5em !important; */
+}
+
+/* dd {
+  /* margin-left: 1.5em !important;      /* Indentazione definizioni */
+  /* text-indent: 1.5em !important;      /* Rientro prima riga anche nelle definizioni 
+} */
+
+/* === LAYER SFONDI (rotazione dinamica) === */
+
+/* ============================================================
+   NUOVE REGOLE: LAYER SFONDI, BLEND MODE, LAYER TOPMOST
+   ============================================================ */
+
+/* ============================================================
+   Z-ORDER E COMPOSITING (Gerarchia blindata)
+   ============================================================ */
+/* === VARIABILE BLEND MODE === */
+:root {
+  --blend-mode: exclusion;
+}
+
+/* === SFONDO BIANCO (base per l'inversione degli sfondi negativi) === */
+body {
+  background-color: #ffffff !important;
+}
+
+/* === LAYER SFONDI (immagini negative che diventano positive) === */
+#sfondo-layer, #sfondo-layer-next {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity 1.5s ease-in-out;
+  mix-blend-mode: exclusion; /* difference; /*exclusion;*/
+  pointer-events: none;
+}
+#sfondo-layer-next {
+  opacity: 0;
+}
+
+/* === CONTENUTO PRINCIPALE === */
+.contenuto-principale {
+  position: relative;
+  min-height: 100vh;
+  padding: 2em;
+  color: #000000;
+}
+
+/* === LAYER TOPMOST (popup modale) === */
+#layer-topmost {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 2em;
+  overflow-y: auto;
+  display: none;
+}
+#layer-topmost.visibile {
+  display: block;
+}
+
+#layer-topmost a {
+  color: #0066cc;
+  text-decoration: none;
+}
+#layer-topmost a:hover {
+  text-decoration: underline;
+}
+#layer-topmost ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#layer-topmost li {
+  padding: 0.5em 0;
+  border-bottom: 1px dotted #ccc;
+}
+
+.topmost-controlli {
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  border-bottom: 2px solid #ccc;
+}
+.topmost-controlli button {
+  background: #eee;
+  border: 1px solid #999;
+  padding: 6px 12px;
+  margin-right: 6px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+/* === PULSANTE TOGGLE === */
+#btn-toggle-topmost {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 10000;
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 1.2em;
+  border-radius: 4px;
+}
+
+.contenuto-principale img {
+  position: relative;
+  z-index: 2;
+  mix-blend-mode: normal;
+}
